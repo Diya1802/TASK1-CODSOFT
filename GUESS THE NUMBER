@@ -1,0 +1,61 @@
+package Day1;
+import java.util.Scanner;
+import java.util.Random;
+class Guess_the_number{
+    Scanner sc = new Scanner(System.in);
+    int random_no;
+    int user_input;
+    int No_of_attempts =0;
+    private int no_of_guesses ;
+    int score = 0;
+    public  Guess_the_number( int a){
+          random_no = a;
+    }
+    public void take_user_input(int num){
+         user_input = num;
+    }
+    public void isCorrectNumber() {
+        System.out.println("Enter guess no.");
+        take_user_input(sc.nextInt());
+        while (user_input != random_no && No_of_attempts<4) {
+
+            if (user_input > random_no) {
+                System.out.println("Guess no. TOO HIGH than random no. ");
+            } else {
+                System.out.println("Guess no. is TOO LOW than random no");
+            }
+            System.out.println("Enter guess no.");
+            take_user_input(sc.nextInt());
+            No_of_attempts +=1;
+          }
+        if(No_of_attempts<5&&user_input==random_no) {
+            System.out.println("Hurrey! YOU WIN\n YOU GOT THE CORRECT NUM");
+            SetNo_of_guesses(No_of_attempts);
+            score += 1;
+        }
+        else{
+            System.out.println("OOPS! YOU LOSS\n YOUR ATTEMPTS ARE OVER");
+            System.out.println("Random no. is :"+random_no);
+            SetNo_of_guesses(No_of_attempts);
+        }
+       }
+    public void SetNo_of_guesses( int s) {
+        no_of_guesses = s+1;
+    }
+    public int getNo_of_guesses() {
+            return no_of_guesses;
+    }
+   }
+public class Task1 {
+    public static void main(String[] args) {
+       Random r = new Random();
+        System.out.println(" Welcome !\n Let's Play Guess the number Game.\n You have to guess a random no. between 1-100.\n You have 5 attempts to guess the no.");
+        for(int i =1;i<=3;i++) {
+            System.out.println("ROUND :-" +i);
+            Guess_the_number obj = new Guess_the_number(r.nextInt(0, 100));
+            obj.isCorrectNumber();
+            System.out.println("Number of guesses :" + obj.getNo_of_guesses());
+        }
+         }
+
+    }
